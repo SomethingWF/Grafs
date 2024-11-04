@@ -12,15 +12,16 @@ public:
   }
 
   void addEdge(int u, int v) {
-    adjMatrix[u][v] += 1;
-    adjMatrix[v][u] += 1;
+    if (u != v) {
+      adjMatrix[u][v] = 1;
+      adjMatrix[v][u] = 1;
+    }
+    else std::cout << "Trying to create a loop";
   }
 
   void removeEdge(int u, int v) {
-    if (adjMatrix[u][v] > 0) {
-      adjMatrix[u][v] -= 1;
-      adjMatrix[v][u] -= 1;
-    }
+    adjMatrix[u][v] = 0;
+    adjMatrix[v][u] = 0;
   }
 
   void addVertice() {
@@ -51,6 +52,22 @@ public:
     }
   }
 
+  void merge(int x, int y) {
+    if (x != y)
+    {
+      adjMatrix[x][y] = 0;
+      adjMatrix[y][x] = 0;
+      for (int i = 0; i < v_; ++i) {
+        int a = (adjMatrix[x][i] != adjMatrix[y][i]);
+        int b = (adjMatrix[x][i] + adjMatrix[y][i]) / 2;
+        adjMatrix[x][i] = a + b;
+        adjMatrix[i][x] = adjMatrix[x][i];
+      }
+      removeVertice(y);
+    }
+    else std::cout << "Trying to merge itself";
+  }
+
   void printGraph() {
     for (int i = 0; i < v_; ++i) {
       for (int j = 0; j < v_; ++j) {
@@ -62,7 +79,7 @@ public:
 };
 
 int main() {
-  Graph g(5); // Создаем граф с 5 вершинами
+  Graph g(8);
   g.addEdge(0, 1);
   g.addEdge(0, 4);
   g.addEdge(1, 2);
@@ -70,19 +87,18 @@ int main() {
   g.addEdge(1, 4);
   g.addEdge(2, 3);
   g.addEdge(3, 4);
+  g.addEdge(4, 5);
+  g.addEdge(3, 5);
+  g.addEdge(4, 6);
+  g.addEdge(6, 5);
+  g.addEdge(3, 7);
+  g.addEdge(7, 5);
 
-  g.printGraph(); // Печатаем матрицу смежности
-
-  g.removeVertice(3);
-  std::cout << '\n';
   g.printGraph();
 
-  g.addVertice();
-  g.addEdge(4, 3);
-  g.addEdge(4, 1);
-  g.addEdge(4, 2);
+
+  g.merge(5, 1);
   std::cout << '\n';
   g.printGraph();
-
   return 0;
 }
