@@ -97,7 +97,7 @@ int main() {
   g.printGraph();
 
 
-  g.merge(5, 1);
+  g.merge(1, 2);
   std::cout << '\n';
   g.printGraph();
   return 0;
