@@ -50,7 +50,6 @@ public:
       }
       --v_;
     }
-    else std::cout << "Trying to remove not existing vertice" << std::endl;
   }
 
   void merge(int x, int y) {
