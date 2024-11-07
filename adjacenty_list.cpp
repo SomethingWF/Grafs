@@ -4,13 +4,11 @@
 
 class Graph {
 public:
-    // Конструктор, принимающий количество вершин
     Graph(int v) {
         v_ = v;
-        adjList.resize(v_); // Инициализация списка смежности
+        adjList.resize(v_);
     }
 
-    // Метод для добавления ребра
     void addEdge(int x, int y) {
       if (x < v_ && y < v_) {
         if (x != y)
@@ -130,7 +128,6 @@ public:
       removeVertice(x);
     }
     
-    // Метод для отображения списка смежности
     void printGraph() {
         for (int v = 0; v < v_; ++v) {
             std::cout << "Vertice " << v << ": ";
@@ -142,14 +139,13 @@ public:
     }
 
 private:
-    int v_; // Количество вершин
-    std::vector<std::forward_list<int>> adjList; // Список смежности
+    int v_;
+    std::vector<std::forward_list<int>> adjList;
 };
 
 int main() {
-    Graph g(5); // Создаем граф с 5 вершинами
+    Graph g(5);
 
-    // Добавляем рёбра
     g.addEdge(0, 1);
     g.addEdge(0, 2);
     g.addEdge(1, 3);
@@ -159,7 +155,6 @@ int main() {
     g.addEdge(2, 5);
     g.merge(1, 2);
 
-    // Выводим список смежности
     g.printGraph();
 
     return 0;

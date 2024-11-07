@@ -3,12 +3,12 @@
 
 class Graph {
 private:
-  int v_ = 0; // Количество вершин
-  std::vector<std::vector<int>> adjMatrix; // Матрица смежности
+  int v_ = 0;
+  std::vector<std::vector<int>> adjMatrix;
 
 public:
   Graph(int vertices) : v_(vertices) {
-    adjMatrix.resize(v_, std::vector<int>(v_, 0)); // Инициализация матрицы нулями
+    adjMatrix.resize(v_, std::vector<int>(v_, 0));
   }
 
   void addEdge(int u, int v) {
